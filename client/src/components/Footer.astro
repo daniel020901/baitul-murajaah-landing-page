@@ -1,0 +1,123 @@
+---
+import {  Mail, Phone, MapPin } from 'lucide-react';
+---
+
+<footer class="bg-slate-950 text-[#E8CFC8] relative z-10 overflow-hidden">
+  {/* Calligraphy Watermark */}
+  <div class="absolute bottom-[-60px] left-1/2 -translate-x-1/2 font-arabic text-[150px] sm:text-[260px] leading-none text-white/[0.03] whitespace-nowrap pointer-events-none select-none">
+    مُرَاجَعَة
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 pt-20 pb-12 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+      {/* Brand Col */}
+      <div class="lg:col-span-5 space-y-4">
+        <a href="/" class="flex items-center gap-3 group">
+          <img 
+            src="/Logo.png" 
+            alt="Murojaah.id" 
+            class="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+          />
+        </a>
+        <p class="text-sm text-[#E8CFC8]/70 max-w-sm leading-relaxed mt-4">
+          Platform ekosistem Al-Qur'an terpadu di Indonesia — memadukan metode tikrar klasik, komunitas kajian, penerbitan mushaf premium, hingga perjalanan ibrah bersama.
+        </p>
+
+        <div class="font-arabic text-lg text-amber-500 leading-relaxed pt-2">
+          اقْرَأُوا الْقُرْآنَ فَإِنَّهُ يَأْتِي يَوْمَ الْقِيَامَةِ شَفِيعًا لأَصْحَابِهِ
+        </div>
+        <p class="text-xs text-[#E8CFC8]/50 italic">
+          "Bacalah Al-Qur'an, karena sesungguhnya ia akan datang pada hari kiamat sebagai pemberi syafaat bagi para pembacanya." (HR. Muslim)
+        </p>
+
+        
+      </div>
+
+      {/* Quick Links */}
+      <div class="lg:col-span-2 space-y-4">
+        <h5 class="text-white text-xs font-extrabold tracking-widest uppercase">Program</h5>
+        <ul class="space-y-2.5 text-xs text-[#E8CFC8]/70">
+          <li>
+            <a href="/kegiatan?tab=sedang-berjalan" class="hover:text-amber-500 transition-colors">
+              Halaqah Subuh
+            </a>
+          </li>
+          <li>
+            <a href="/kegiatan?tab=sedang-berjalan" class="hover:text-amber-500 transition-colors">
+              Dauroh 30 Hari
+            </a>
+          </li>
+          <li>
+            <a href="/kegiatan?tab=event-rutinan" class="hover:text-amber-500 transition-colors">
+              Kajian Hadits Shahih
+            </a>
+          </li>
+          <li>
+            <a href="/kegiatan?tab=event-rutinan" class="hover:text-amber-500 transition-colors">
+              Umroh Bareng Huffadz
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Toko & Literasi */}
+      <div class="lg:col-span-2 space-y-4">
+        <h5 class="text-white text-xs font-extrabold tracking-widest uppercase">Literasi</h5>
+        <ul class="space-y-2.5 text-xs text-[#E8CFC8]/70">
+          <li>
+            <a href="/toko?cat=MUSHAF+STANDAR" class="hover:text-amber-500 transition-colors">
+              Mushaf Huffadz
+            </a>
+          </li>
+          <li>
+            <a href="/toko?cat=KITAB+HADITS" class="hover:text-amber-500 transition-colors">
+              Kitab Shahih Bukhari
+            </a>
+          </li>
+          <li>
+            <a href="/toko?cat=EBOOK+DIGITAL" class="hover:text-amber-500 transition-colors">
+              Ebook Tikrar 20x
+            </a>
+          </li>
+          <li>
+            <a href="/blog" class="hover:text-amber-500 transition-colors">
+              Artikel Murojaah
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Contact Info */}
+      <div class="lg:col-span-3 space-y-4">
+        <h5 class="text-white text-xs font-extrabold tracking-widest uppercase">Kontak Admin</h5>
+        <ul class="space-y-3 text-xs text-[#E8CFC8]/70">
+          <li class="flex items-center gap-2.5">
+            <Phone className="w-4 h-4 text-amber-500 shrink-0" />
+            <span>+62 812-3456-7890 (WA Admin)</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <Mail className="w-4 h-4 text-amber-500 shrink-0" />
+            <span>salam@murojaah.id</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+            <span>Jakarta Selatan, DKI Jakarta, Indonesia</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div class="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#E8CFC8]/50">
+      <p>© 2026 Murojaah.id. Wadah Para Hafizh Qur'an Indonesia. All rights reserved.</p>
+      <div class="flex items-center gap-6">
+        <a href="/" class="hover:text-amber-500 transition-colors">
+          Kebijakan Privasi
+        </a>
+        <a href="/" class="hover:text-amber-500 transition-colors">
+          Syarat & Ketentuan
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

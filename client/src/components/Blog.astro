@@ -1,0 +1,389 @@
+---
+// Data artikel — gambar diambil dari Unsplash (lisensi bebas pakai)
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&h=750&q=80`;
+
+const articles = [
+  {
+    category: 'Warta Santri',
+    title: "Murojaah Camp 2026 Resmi Digelar di Taman Jati, Memperkuat Ukhuwah dan Itqan Hafalan",
+    author: 'Media Murojaah',
+    date: '10 Oktober 2026',
+    excerpt:
+      "Bogor — Yayasan Penjaga Hafalan Al-Qur'an secara resmi membuka agenda Murojaah Camp 2026. Kegiatan tahunan ini bertujuan mematangkan hafalan para santri di alam terbuka dengan metode tikrar intensif...",
+    href: '/blog/murojaah-camp-2026',
+    image: unsplash('photo-1609599006353-e629aaabfeae'),
+    alt: "Mushaf Al-Qur'an bersampul emas di atas hamparan pasir",
+  },
+  {
+    category: 'Dauroh',
+    title: 'Dauroh Murojaah Pekanan di Masjid Nur Inka Diikuti Ratusan Huffadz dari Berbagai Daerah',
+    author: 'Redaksi Warta',
+    date: '3 Oktober 2026',
+    excerpt:
+      'Cibinong — Ratusan penghafal Al-Qur\'an memadati Masjid Nur Inka untuk mengikuti dauroh murojaah pekanan. Setiap peserta menyetorkan hafalan secara bergiliran di hadapan para musyrif...',
+    href: '/blog/dauroh-murojaah-nur-inka',
+    image: unsplash('photo-1519817650390-64a93db51149'),
+    alt: 'Pemandangan udara masjid berkubah biru saat matahari terbenam',
+  },
+  {
+    category: 'Majelis Ilmu',
+    title: 'Khataman Kajian Shahih Bukhari Jilid Pertama Bersama Dewan Masyayikh',
+    author: 'Media Murojaah',
+    date: '26 September 2026',
+    excerpt:
+      'Majelis Shahih Bukhari di Mihrab Masyayikh menutup kajian jilid pertama dengan doa khataman. Para santri mendapatkan sanad periwayatan langsung dari Dr. K.H. Deden Muhammad Makhyaruddin...',
+    href: '/blog/khataman-shahih-bukhari',
+    image: unsplash('photo-1542816417-0983c9c9ad53'),
+    alt: 'Kitab bersampul biru dengan ornamen kaligrafi perak',
+  },
+  {
+    category: 'Sanad',
+    title: "Tujuh Santri Baitul Murojaah Menerima Ijazah Sanad Al-Qur'an Muttashil",
+    author: 'Redaksi Warta',
+    date: '19 September 2026',
+    excerpt:
+      'Setelah menuntaskan setoran 30 juz secara mutqin, tujuh santri angkatan pertama resmi menerima ijazah sanad yang bersambung hingga Rasulullah ﷺ dalam prosesi yang penuh haru...',
+    href: '/blog/ijazah-sanad-angkatan-pertama',
+    image: unsplash('photo-1576764402988-7143f9cca90a'),
+    alt: "Mushaf Al-Qur'an terbuka dikelilingi bunga putih",
+  },
+  {
+    category: 'Tips Hafalan',
+    title: 'Metode Tikrar: Rahasia Menjaga Hafalan 30 Juz Tetap Mutqin',
+    author: 'Tim Kurikulum',
+    date: '12 September 2026',
+    excerpt:
+      'Mengulang adalah kunci. Simak bagaimana metode tikrar terstruktur yang diterapkan di Baitul Murojaah membantu para huffadz menjaga hafalan agar tetap kuat meski di tengah kesibukan...',
+    href: '/blog/metode-tikrar-hafalan-mutqin',
+    image: unsplash('photo-1585036156171-384164a8c675'),
+    alt: "Lembaran mushaf Al-Qur'an yang terlipat membentuk hati",
+  },
+  {
+    category: 'Infaq Murojaah',
+    title: "Program Infaq Murojaah Salurkan Beasiswa Penuh untuk Santri Penghafal Al-Qur'an",
+    author: 'Media Murojaah',
+    date: '5 September 2026',
+    excerpt:
+      'Berkat dukungan para donatur, Infaq Murojaah menyalurkan beasiswa penuh yang mencakup asrama, konsumsi, dan kitab bagi santri penghafal Al-Qur\'an dari keluarga prasejahtera...',
+    href: '/blog/beasiswa-infaq-murojaah',
+    image: unsplash('photo-1584551246679-0daf3d275d0f'),
+    alt: 'Masjid megah berkubah putih dengan pantulan cahaya senja',
+  },
+];
+
+const AUTOPLAY_MS = 5000;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<!-- ================= SECTION BERITA & WARTA TERBARU ================= -->
+<section id="blog" class="py-20 md:py-28 relative z-10 overflow-hidden">
+  <div class="max-w-[1300px] mx-auto px-5 sm:px-8">
+
+    <!-- Header Section -->
+    <div class="text-center mb-12 sm:mb-16">
+      <span class="inline-block text-xs uppercase tracking-widest font-bold text-primary mb-2">
+        Warta Baitul Murojaah
+      </span>
+      <h2 class=" text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+        Berita Terbaru
+      </h2>
+    </div>
+
+    <!-- Featured Post Carousel -->
+    <div
+      class="blog-carousel relative"
+      data-blog-carousel
+      data-interval={AUTOPLAY_MS}
+      data-paused="false"
+      style={`--blog-interval: ${AUTOPLAY_MS}ms;`}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Berita Terbaru"
+    >
+      <div class="relative">
+
+        <!-- Tombol Panah Kiri -->
+        <button
+          type="button"
+          data-prev
+          aria-label="Artikel Sebelumnya"
+          class="blog-arrow absolute top-1/2 -translate-y-1/2 -left-3 sm:-left-5 z-20 hidden md:flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-md bg-foreground/80 text-background transition-colors hover:bg-foreground"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <!-- Viewport & Track -->
+        <div class="overflow-hidden" data-viewport>
+          <div class="blog-track flex" data-track aria-live="off">
+            {articles.map((post, i) => (
+              <article
+                class="blog-slide w-full shrink-0"
+                data-slide
+                data-active={i === 0 ? 'true' : 'false'}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${i + 1} dari ${articles.length}`}
+                aria-hidden={i === 0 ? 'false' : 'true'}
+                inert={i !== 0}
+              >
+                <!-- Grid Gambar Kiri + Teks Kanan -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center px-4 sm:px-8">
+
+                  <!-- KOLOM KIRI: Gambar Berita -->
+                  <div class="lg:col-span-6 flex justify-center">
+                    <a
+                      href={post.href}
+                      tabindex="-1"
+                      aria-hidden="true"
+                      class="slide-media relative block w-full aspect-[16/10] overflow-hidden rounded-xl bg-muted border border-border"
+                    >
+                      <img
+                        src={post.image}
+                        alt={post.alt}
+                        width="1200"
+                        height="750"
+                        loading="eager"
+                        decoding="async"
+                        fetchpriority={i === 0 ? 'high' : 'low'}
+                        class="slide-img h-full w-full object-cover"
+                      />
+                    </a>
+                  </div>
+
+                  <!-- KOLOM KANAN: Konten Berita -->
+                  <div class="slide-content lg:col-span-6 flex flex-col items-start space-y-4">
+
+                    <!-- Badge Kategori -->
+                    <span class="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded bg-primary text-primary-foreground">
+                      {post.category}
+                    </span>
+
+                    <!-- Judul Artikel -->
+                    <h3 class="text-2xl sm:text-3xl font-bold leading-snug text-foreground">
+                      <a href={post.href} class="hover:text-primary/70 transition-colors">
+                        {post.title}
+                      </a>
+                    </h3>
+
+                    <!-- Meta Penulis & Tanggal -->
+                    <div class="text-xs sm:text-sm text-muted-foreground font-mono">
+                      <span>By {post.author}</span>
+                      <span class="mx-1.5">•</span>
+                      <time>{post.date}</time>
+                    </div>
+
+                    <!-- Cuplikan / Excerpt -->
+                    <p class="text-sm sm:text-base text-muted-foreground leading-relaxed line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    <!-- Tombol Read More -->
+                    <div class="pt-2">
+                      <a
+                        href={post.href}
+                        class="inline-flex items-center justify-center border border-foreground/40 bg-transparent px-5 py-2 text-xs font-semibold uppercase tracking-wider text-foreground hover:bg-foreground hover:text-background transition-colors"
+                      >
+                        Read More
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <!-- Tombol Panah Kanan -->
+        <button
+          type="button"
+          data-next
+          aria-label="Artikel Berikutnya"
+          class="blog-arrow absolute top-1/2 -translate-y-1/2 -right-3 sm:-right-5 z-20 hidden md:flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-md bg-foreground/80 text-background transition-colors hover:bg-foreground"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Dots Pagination (mengikuti artikel aktif) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 px-4 sm:px-8 pt-6 lg:pt-8">
+        <div class="lg:col-start-7 lg:col-span-6 flex items-center gap-4">
+          <div class="flex items-center gap-1" role="tablist" aria-label="Pilih artikel">
+            {articles.map((post, i) => (
+              <button
+                type="button"
+                class="blog-dot p-1"
+                data-dot={i}
+                data-active={i === 0 ? 'true' : 'false'}
+                role="tab"
+                aria-selected={i === 0 ? 'true' : 'false'}
+                aria-label={`Artikel ${i + 1}: ${post.title}`}
+              >
+                <span class="dot-visual block">
+                  <span class="dot-fill"></span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <!-- Counter -->
+          <span class="text-xs font-mono text-muted-foreground tabular-nums" aria-hidden="true">
+            <span data-current class="text-foreground font-semibold">01</span>
+            <span class="mx-1">/</span>
+            <span>{pad(articles.length)}</span>
+          </span>
+
+          <!-- Panah kecil untuk layar mobile -->
+          <div class="ml-auto flex items-center gap-2 md:hidden">
+            <button
+              type="button"
+              data-prev
+              aria-label="Artikel Sebelumnya"
+              class="flex h-9 w-9 items-center justify-center rounded-md border border-foreground/30 text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              data-next
+              aria-label="Artikel Berikutnya"
+              class="flex h-9 w-9 items-center justify-center rounded-md border border-foreground/30 text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ---------- Track geser ---------- */
+  .blog-track {
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+  }
+
+  /* ---------- Gambar: zoom halus saat slide aktif ---------- */
+  .slide-img {
+    transform: scale(1.08);
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .blog-slide[data-active='true'] .slide-img {
+    transform: scale(1);
+  }
+  .blog-slide[data-active='true'] .slide-media:hover .slide-img {
+    transform: scale(1.05);
+  }
+
+  /* ---------- Konten teks: muncul bertahap ---------- */
+  .slide-content > * {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .blog-slide[data-active='true'] .slide-content > * {
+    opacity: 1;
+    transform: none;
+  }
+  .blog-slide[data-active='true'] .slide-content > :nth-child(1) { transition-delay: 0.25s; }
+  .blog-slide[data-active='true'] .slide-content > :nth-child(2) { transition-delay: 0.32s; }
+  .blog-slide[data-active='true'] .slide-content > :nth-child(3) { transition-delay: 0.39s; }
+  .blog-slide[data-active='true'] .slide-content > :nth-child(4) { transition-delay: 0.46s; }
+  .blog-slide[data-active='true'] .slide-content > :nth-child(5) { transition-delay: 0.53s; }
+
+  /* ---------- Tombol panah ---------- */
+  .blog-arrow {
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .blog-arrow:hover {
+    transform: translateY(-50%) scale(1.06);
+  }
+  .blog-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  /* ---------- Dots pagination + progress autoplay ---------- */
+  .dot-visual {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, var(--foreground) 45%, transparent);
+    transition:
+      width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.3s ease;
+  }
+  .blog-dot:hover .dot-visual {
+    border-color: var(--foreground);
+  }
+  .blog-dot[data-active='true'] .dot-visual {
+    width: 34px;
+    border-color: color-mix(in oklab, var(--foreground) 85%, transparent);
+  }
+  .dot-fill {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in oklab, var(--foreground) 85%, transparent);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  /* Progress aktif berjalan dari 0% ke 100% */
+  .blog-dot[data-active='true'] .dot-fill.is-animating {
+    animation: blog-dot-progress var(--blog-interval, 5000ms) linear forwards;
+  }
+
+  /* Jeda progress saat artikel di-hover */
+  .blog-carousel[data-paused='true'] .dot-fill.is-animating {
+    animation-play-state: paused;
+  }
+
+  @keyframes blog-dot-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-track,
+    .slide-img,
+    .slide-content > *,
+    .dot-visual {
+      transition: none;
+    }
+    .blog-dot[data-active='true'] .dot-fill {
+      animation: none;
+      transform: scaleX(1);
+    }
+  }
+</style>
+
+<!-- Script carousel didelegasikan ke controller ui/blogProgress.tsx -->
+<script>
+  import { initBlogProgress } from './ui/blogProgress';
+
+  initBlogProgress();
+  document.addEventListener('astro:page-load', () => {
+    initBlogProgress();
+  });
+</script>

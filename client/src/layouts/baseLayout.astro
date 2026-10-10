@@ -1,0 +1,25 @@
+---
+import Footer from "@/components/Footer.astro";
+import {Navbar} from "@/components/Navbar.tsx";
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Murojaah.id | {title}</title>
+  </head>
+  <body>
+    <Navbar client:load />
+    <main
+      class="min-h-screen w-full overflow-x-hidden bg-white dark:bg-neutral-950 text-foreground antialiased rounded-xl"
+    >
+    
+      <slot />
+      
+    <Footer/>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+---
+import '@/styles/global.css'
+import { Button } from '@/components/ui/button';
+import  BaseLayout  from '@/layouts/baseLayout.astro';
+import {Hero} from '@/components/Hero';
+import Visi from '@/components/Visi.astro';
+import Activity from '@/components/Activity.astro';
+import Blog from '@/components/Blog.astro';
+import Gallery from '@/components/Gallery';
+import BookSection from '@/components/BookSection.astro';
+
+const title = "Home"
+---
+
+<BaseLayout title = {title}>
+	<Hero client:load />
+	<Visi/>
+	<Activity/>
+	<BookSection/>
+	<Blog/>
+	<Gallery client:load/>
+	</BaseLayout>
+

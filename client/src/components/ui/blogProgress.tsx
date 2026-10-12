@@ -192,7 +192,6 @@ export function setupBlogCarousel(
     viewport.addEventListener('mouseleave', onViewportLeave);
   }
 
-  // Tab visibility: jeda saat tab browser tidak aktif
   const onVisibilityChange = () => {
     if (!root.isConnected) return;
     if (document.hidden) {

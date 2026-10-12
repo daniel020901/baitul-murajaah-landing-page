@@ -25,23 +25,23 @@ export function Navbar() {
       {/* ================= HEADER ================= */}
       <header className="max-w-[1400px] mx-auto px-2 sm:px-8 py-6 flex items-center justify-between gap-4 relative z-50 bg-background lg:bg-transparent">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2.5 shrink-0">
+        <a href="/" className="flex items-center gap-2.5 shrink-0">
           <img src="/Logo.png" alt="Baitul Murojaah" className="w-25 h-25 object-contain mix-blend-multiply" />
           <span className="font-extrabold text-[15px] sm:text-lg tracking-tight leading-tight uppercase text-foreground">Baitul<br />Murojaah</span>
         </a>
 
         {/* Navigasi pill */}
         <nav className="hidden lg:flex items-center gap-1 rounded-full border border-border bg-background/60 backdrop-blur p-1.5">
-          <a href="#home" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Home</a>
-          <a href="#blog" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Blog</a>
-          <a href="#bookstore" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Bookstore</a>
-          <a href="#kegiatan" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Kegiatan</a>
-          <a href="#cabang" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Cabang</a>
+          <a href="/" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Home</a>
+          <a href="/blog" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Blog</a>
+          <a href="/bookstore" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Bookstore</a>
+          <a href="/kegiatan" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Kegiatan</a>
+          <a href="/cabang" className="px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground hover:bg-foreground hover:text-background transition">Cabang</a>
         </nav>
 
         <div className="flex items-center gap-3">
           {/* CTA Desktop & Tablet */}
-          <a href="#kontak" className="hidden sm:inline-flex items-center gap-3 rounded-full bg-destructive text-destructive-foreground pl-6 pr-1.5 py-1.5 group hover:bg-destructive/90 transition-colors">
+          <a href="/kontak" className="hidden sm:inline-flex items-center gap-3 rounded-full bg-destructive text-destructive-foreground pl-6 pr-1.5 py-1.5 group hover:bg-destructive/90 transition-colors">
             <span className="text-[11px] font-semibold uppercase tracking-[0.18em]">Daftar Sekarang</span>
             <span className="w-9 h-9 rounded-full bg-destructive-foreground text-destructive grid place-items-center transition-transform duration-300 group-hover:rotate-45">
               <Send />

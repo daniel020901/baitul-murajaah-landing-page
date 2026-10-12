@@ -1,0 +1,170 @@
+---
+import '@/styles/global.css';
+import '@/styles/blog.css';
+import BaseLayout from '@/layouts/baseLayout.astro';
+import { articles, categories, recentPosts } from '@/data/mock';
+
+const title = 'Blog';
+const bannerImg = 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1400&h=420&q=85';
+---
+
+<BaseLayout title={title}>
+
+  <!-- ═══════════════════ BANNER HERO ═══════════════════ -->
+  <div class="blog-banner">
+    <img
+      src={bannerImg}
+      alt="Blog Baitul Murojaah"
+      class="blog-banner__img"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="blog-banner__overlay">
+      <div class="blog-banner__inner">
+        <p class="blog-banner__sub">Baitul Murojaah</p>
+        <h1 class="blog-banner__title">Berita &amp; Warta</h1>
+        <p class="blog-banner__desc">
+          Informasi terkini seputar kegiatan, kajian, program, dan
+          inspirasi dari komunitas penghafal Al-Qur'an.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ BREAD CRUMB ═══════════════════ -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Blog</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ MAIN CONTENT ═══════════════════ -->
+  <div class="container blog-layout">
+
+    <!-- ── Kiri: Daftar Artikel ── -->
+    <main class="blog-main">
+
+      {articles.map((post) => (
+        <article class="post-card">
+          <!-- Thumbnail -->
+          <a href={`/blog/${post.slug}`} class="post-card__thumb" tabindex="-1" aria-hidden="true">
+            <img
+              src={post.image}
+              alt={post.alt}
+              width="700"
+              height="440"
+              loading="lazy"
+              decoding="async"
+              class="post-card__img"
+            />
+            <span class="post-card__badge">{post.category}</span>
+          </a>
+
+          <!-- Meta -->
+          <div class="post-card__meta">
+            <span class="post-meta-item">
+              <!-- icon user -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              {post.author}
+            </span>
+            <span class="post-meta-item">
+              <!-- icon calendar -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <time datetime={post.dateIso}>{post.date}</time>
+            </span>
+            <span class="post-meta-item">
+              <!-- icon tag -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              {post.category}
+            </span>
+          </div>
+
+          <!-- Judul -->
+          <h2 class="post-card__title">
+            <a href={`/blog/${post.slug}`}>{post.title}</a>
+          </h2>
+
+          <!-- Excerpt -->
+          <p class="post-card__excerpt">{post.excerpt}</p>
+
+          <!-- Read More -->
+          <a href={`/blog/${post.slug}`} class="post-card__readmore">
+            Baca Selengkapnya
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+
+          <hr class="post-card__divider" />
+        </article>
+      ))}
+
+    </main>
+
+    <!-- ── Kanan: Sidebar ── -->
+    <aside class="blog-sidebar">
+
+      <!-- Search -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-widget__title">Search</h3>
+        <form class="sidebar-search" role="search" action="/blog/search">
+          <input
+            id="blog-search-input"
+            type="search"
+            name="q"
+            placeholder="Cari artikel..."
+            class="sidebar-search__input"
+            aria-label="Cari artikel"
+          />
+          <button type="submit" class="sidebar-search__btn">Search</button>
+        </form>
+      </div>
+
+      <!-- Recent Posts -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-widget__title">Recent Posts</h3>
+        <ul class="recent-posts">
+          {recentPosts.map((p) => (
+            <li class="recent-post">
+              <a href={`/blog/${p.slug}`} class="recent-post__thumb-link">
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  width="80"
+                  height="60"
+                  loading="lazy"
+                  decoding="async"
+                  class="recent-post__thumb"
+                />
+              </a>
+              <div class="recent-post__info">
+                <a href={`/blog/${p.slug}`} class="recent-post__title">{p.title}</a>
+                <span class="recent-post__date">{p.date}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-widget__title">Categories</h3>
+        <ul class="sidebar-categories">
+          {categories.map((cat) => (
+            <li>
+              <a href={`/blog?category=${encodeURIComponent(cat)}`} class="sidebar-cat-link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                {cat}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+
+</BaseLayout>
+

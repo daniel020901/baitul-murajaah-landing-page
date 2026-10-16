@@ -33,7 +33,16 @@ export interface Article {
   /** Isi artikel dalam format HTML string — digunakan di [slug].astro */
   body?: string;
 }
-
+export interface CartItem {
+  id: string;
+  title: string;
+  category: string;
+  price: number;
+  originalPrice?: number;
+  coverStyle: string;
+  arabicTitle: string;
+  quantity: number;
+}
 const unsplash = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&h=750&q=80`;
 

@@ -1,0 +1,479 @@
+---
+import '@/styles/global.css';
+import BaseLayout from '@/layouts/baseLayout.astro';
+import StarBorder from '@/components/ui/Starborder';
+
+const title = 'Kegiatan';
+
+const locations = [
+  {
+    no: '01',
+    tag: 'Majelis Pusat',
+    title: 'Mihrab Masyayikh',
+    place: 'Kediaman KH. Deden (Cibinong)',
+    program: 'Talaqqi Sanad & Konsultasi',
+    icon: [
+      'M12 7v14',
+      'M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z',
+    ],
+  },
+  {
+    no: '02',
+    tag: 'Dauroh Intensif',
+    title: 'Dauroh Murojaah',
+    place: 'Masjid Nur Inka',
+    program: "Halaqah Tasmi' & Kajian Umum",
+    icon: ['M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9', 'M20 3v4', 'M22 5h-4'],
+  },
+  {
+    no: '03',
+    tag: 'Camp Alam',
+    title: 'Murojaah Camp',
+    place: 'Taman Jati Kembang Sepatu',
+    program: 'Karantina Mutqin Terbuka',
+    icon: ['M3.5 21 14 3', 'M20.5 21 10 3', 'M15.5 21 12 15l-3.5 6', 'M2 21h20'],
+  },
+  {
+    no: '04',
+    tag: 'Asrama Santri',
+    title: 'Baitul Murojaah',
+    place: 'Kampus Pesantren Utama',
+    program: 'Kurikulum 1 Tahun Muqim',
+    icon: [
+      'M14 21v-3a2 2 0 0 0-4 0v3',
+      'M18 5v16',
+      'm4 6 7.106-3.79a2 2 0 0 1 1.788 0L20 6',
+      'm6 11-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11',
+      'M6 5v16',
+      'M14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0',
+    ],
+  },
+];
+
+const schedules = [
+  {
+    day: 'Senin',
+    time: '07.00 – 09.00',
+    title: "Halaqah Tasmi' Pagi",
+    place: 'Masjid Nur Inka',
+    type: 'Rutin',
+    color: 'from-rose-500 to-red-700',
+  },
+  {
+    day: 'Rabu',
+    time: '08.00 – 11.00',
+    title: 'Dauroh Tajwid & Makhraj',
+    place: 'Kampus Utama',
+    type: 'Intensif',
+    color: 'from-amber-500 to-orange-700',
+  },
+  {
+    day: 'Jumat',
+    time: '13.00 – 15.00',
+    title: 'Kajian Mutasyabihat',
+    place: 'Kediaman KH. Deden',
+    type: 'Kajian',
+    color: 'from-emerald-500 to-teal-700',
+  },
+  {
+    day: 'Sabtu',
+    time: '06.00 – 12.00',
+    title: 'Murojaah Camp Terbuka',
+    place: 'Taman Jati Kembang Sepatu',
+    type: 'Camp',
+    color: 'from-violet-500 to-purple-800',
+  },
+  {
+    day: 'Ahad',
+    time: '07.30 – 10.00',
+    title: "Tasmi' Bil Ghoib Umum",
+    place: 'Masjid Nur Inka',
+    type: 'Umum',
+    color: 'from-sky-500 to-blue-700',
+  },
+];
+---
+
+<BaseLayout title={title}>
+  {/* ── BREADCRUMB ── */}
+  <div class="border-b border-border bg-card/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3">
+      <nav class="flex items-center gap-2 text-xs text-muted-foreground font-medium" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-foreground transition-colors">Home</a>
+        <span class="text-border" aria-hidden="true">/</span>
+        <span class="text-foreground font-semibold" aria-current="page">Kegiatan</span>
+      </nav>
+    </div>
+  </div>
+
+  <main class="min-h-screen pb-24 bg-background text-foreground">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
+
+      {/* ── HERO BANNER ── */}
+      <header class="relative overflow-hidden rounded-3xl border border-border text-white p-8 sm:p-14 mb-16 min-h-[300px] flex flex-col justify-center">
+        <img
+          src="/banner_yt.jpg"
+          alt="Banner Kegiatan Baitul Murojaah"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" aria-hidden="true"></div>
+
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-black/40 backdrop-blur-xs text-white border border-white/20 text-[11px] font-extrabold tracking-widest uppercase mb-4">
+            Pusat Kegiatan & Persebaran
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-white">
+            Titik Majelis &amp; <span class="bg-gradient-to-r from-amber-200 via-amber-300 to-yellow-400 bg-clip-text text-transparent">Siaran Langsung</span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-white/85 mt-4 leading-relaxed">
+            Pantau siaran tasmi' santri secara langsung serta temukan lokasi halaqah, dauroh, dan program resmi Baitul Murojaah.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-white/20 text-xs text-white/95">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Streaming YouTube Live</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>4 Titik Halaqah Aktif</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Program Rutin & Intensif</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* ── LIVE HIGHLIGHT ── */}
+      <section aria-labelledby="live-heading" class="mb-20">
+        <div class="live-banner relative isolate overflow-hidden rounded-3xl p-6 sm:p-10 lg:p-12 text-white ring-1 ring-amber-300/30">
+
+          <img
+            src="/banner_yt.jpg"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 -z-20 h-full w-full object-cover"
+          />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[#3a0509]/95 via-[#6d0b14]/70 to-[#7f1d1d]/25"></div>
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/45 via-transparent to-black/10"></div>
+
+          <div class="islamic-pattern absolute inset-0 -z-10 opacity-[0.12] pointer-events-none"></div>
+          <div class="pointer-events-none absolute inset-3 sm:inset-4 rounded-2xl border border-amber-300/25"></div>
+
+          <svg class="hero-spin pointer-events-none absolute -left-20 -bottom-20 -z-10 h-72 w-72 text-amber-300/20" viewBox="0 0 100 100" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="0.8">
+              <rect x="20" y="20" width="60" height="60" />
+              <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" />
+              <rect x="30" y="30" width="40" height="40" />
+              <rect x="30" y="30" width="40" height="40" transform="rotate(45 50 50)" />
+              <circle cx="50" cy="50" r="12" />
+              <circle cx="50" cy="50" r="44" stroke-dasharray="2 3" />
+            </g>
+          </svg>
+
+          <div class="pointer-events-none absolute -top-32 left-1/3 -z-10 h-96 w-96 rounded-2xl bg-amber-400/20 blur-3xl"></div>
+
+          <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+            {/* Kiri */}
+            <div class="lg:col-span-5 space-y-5">
+              <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-black/25 backdrop-blur-md text-white border border-amber-300/40 text-xs font-bold tracking-wide">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-lg bg-red-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-lg h-2.5 w-2.5 bg-red-500"></span>
+                </span>
+                SEDANG SIARAN LANGSUNG
+              </div>
+
+              <p lang="ar" dir="rtl" class="text-xl sm:text-2xl text-amber-200/90 leading-none">
+                وَاِذَا قُرِئَ الْقُرْاٰنُ فَاسْتَمِعُوْا لَهٗ وَاَنْصِتُوْا لَعَلَّكُمْ تُرْحَمُوْنَ
+              </p>
+
+              <h2 id="live-heading" class="text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug">
+                Tasmi' Al-Qur'an
+                <span class="bg-gradient-to-r from-amber-200 via-amber-300 to-yellow-500 bg-clip-text text-transparent"> Bil Ghoib </span>
+                Sekali Duduk
+              </h2>
+
+              <div class="flex items-center gap-3 text-amber-300/80" aria-hidden="true">
+                <span class="h-px w-14 bg-gradient-to-r from-transparent to-amber-300/70"></span>
+                <svg class="h-3.5 w-3.5" viewBox="0 0 100 100"><g fill="currentColor"><rect x="20" y="20" width="60" height="60" /><rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" /></g></svg>
+                <span class="h-px w-14 bg-gradient-to-l from-transparent to-amber-300/70"></span>
+              </div>
+
+              <p class="text-sm sm:text-base text-amber-50/80 leading-relaxed">
+                Menyimak hafalan santri Baitul Murojaah secara live streaming dari Masjid Nur Inka. Mari bersama menyimak dan mengambil berkah bacaan.
+              </p>
+
+              <div class="pt-2 flex flex-wrap items-center gap-5">
+                <StarBorder
+                  client:visible
+                  as="a"
+                  href="https://youtu.be/PDJLvF1dUek?si=yxraezb6MaQDtdTG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  theme="dark"
+                  color="#fde68a"
+                  trailColor="#f59e0b"
+                  backgroundColor="linear-gradient(135deg, #dc2626 0%, #991b1b 55%, #7f1d1d 100%)"
+                  textColor="#ffffff"
+                  borderColor="rgba(252, 211, 77, 0.35)"
+                  radius={999}
+                  thickness={1.5}
+                  stars={2}
+                  glow={0.8}
+                  sparkle
+                  hover="lap"
+                  className="yt-star-btn text-sm"
+                >
+                  <svg class="yt-icon w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                  Buka di YouTube
+                </StarBorder>
+
+                <span class="inline-flex items-center gap-1.5 text-xs text-amber-100/75 font-mono">
+                  <svg class="h-4 w-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                    <path d="M15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                  </svg>
+                  Baitul Murojaah
+                </span>
+              </div>
+            </div>
+
+            {/* Kanan: Embed YouTube */}
+            <div class="lg:col-span-7">
+              <div class="relative rounded-2xl p-1.5 bg-gradient-to-br from-amber-200/70 via-amber-500/30 to-amber-200/60">
+                {['-top-2 -left-2', '-top-2 -right-2', '-bottom-2 -left-2', '-bottom-2 -right-2'].map((pos) => (
+                  <svg class={`absolute ${pos} z-10 h-5 w-5 text-amber-300 drop-shadow`} viewBox="0 0 100 100" aria-hidden="true">
+                    <g fill="currentColor"><rect x="20" y="20" width="60" height="60" /><rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" /></g>
+                  </svg>
+                ))}
+                <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
+                  <iframe
+                    class="w-full h-full"
+                    src="https://www.youtube.com/embed/PDJLvF1dUek?si=6tl7tmK_7zSjtWvu"
+                    title="YouTube Live Tasmi"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── GRID LOKASI ── */}
+      <section aria-labelledby="lokasi-heading" class="mb-20">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div>
+            <div class="flex items-center gap-2 text-rose-500">
+              <span class="text-xs font-mono font-bold tracking-[0.25em] uppercase">Lokasi Halaqah</span>
+            </div>
+            <h2 id="lokasi-heading" class="mt-2 text-2xl sm:text-3xl font-bold text-foreground">Temukan Majelis Kami</h2>
+          </div>
+          <p class="text-sm text-muted-foreground max-w-sm sm:text-right">
+            {locations.length} titik kegiatan aktif untuk talaqqi, tasmi', dan karantina hafalan.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 cursor-pointer">
+          {locations.map((loc) => (
+            <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-rose-300/70 dark:hover:border-rose-400/40">
+
+              <span class="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-rose-500 via-amber-400 to-rose-500 transition-transform duration-500 group-hover:scale-x-100"></span>
+
+              <svg class="pointer-events-none absolute -right-12 -top-12 h-44 w-44 text-rose-500 opacity-[0.06] transition-all duration-700 group-hover:rotate-45 group-hover:opacity-[0.16]" viewBox="0 0 100 100" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="20" y="20" width="60" height="60" />
+                  <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" />
+                  <rect x="32" y="32" width="36" height="36" />
+                  <rect x="32" y="32" width="36" height="36" transform="rotate(45 50 50)" />
+                  <circle cx="50" cy="50" r="9" />
+                </g>
+              </svg>
+
+              <span class="pointer-events-none absolute right-6 bottom-20 text-6xl font-bold text-foreground/[0.04] transition-colors duration-500 group-hover:text-rose-500/10">
+                {loc.no}
+              </span>
+
+              <div class="relative grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 to-red-800 text-amber-200 ring-1 ring-amber-300/40 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  {loc.icon.map((d) => <path d={d} />)}
+                </svg>
+              </div>
+
+              <span class="relative mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg bg-rose-50 px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-rose-600 ring-1 ring-rose-200/70 dark:bg-rose-500/10 dark:text-rose-300 dark:ring-rose-400/20">
+                <span class="h-1 w-1 rotate-45 bg-current"></span>
+                {loc.tag}
+              </span>
+
+              <h3 class="relative mt-3 text-xl font-bold text-foreground">{loc.title}</h3>
+
+              <p class="relative mt-2 flex items-start gap-1.5 text-sm text-muted-foreground">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                  <path d="M15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                </svg>
+                {loc.place}
+              </p>
+
+              <div class="relative mt-auto pt-6">
+                <div class="flex items-center justify-between gap-3 border-t border-dashed border-border pt-4">
+                  <span class="text-xs font-semibold text-foreground/80">{loc.program}</span>
+                  <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-border text-foreground/70 transition-all duration-300 group-hover:border-rose-500 group-hover:bg-rose-500 group-hover:text-white group-hover:rotate-45">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── JADWAL KEGIATAN ── */}
+      <section aria-labelledby="jadwal-heading" class="mb-20">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div>
+            <div class="flex items-center gap-2 text-rose-500">
+              <span class="text-xs font-mono font-bold tracking-[0.25em] uppercase">Jadwal Tetap</span>
+            </div>
+            <h2 id="jadwal-heading" class="mt-2 text-2xl sm:text-3xl font-bold text-foreground">Program Mingguan</h2>
+          </div>
+          <p class="text-sm text-muted-foreground max-w-sm sm:text-right">
+            Jadwal rutin yang bisa diikuti oleh santri muqim maupun umum.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {schedules.map((s) => (
+            <div class="group relative flex gap-4 items-start rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-rose-300/60 dark:hover:border-rose-400/30 cursor-pointer overflow-hidden">
+
+              <span class="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-rose-500 to-amber-400 transition-transform duration-500 group-hover:scale-x-100"></span>
+
+              <div class={`shrink-0 grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br ${s.color} text-white text-xs font-extrabold`}>
+                {s.day.slice(0, 3)}
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-2 mb-1">
+                  <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground">{s.time}</span>
+                  <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground">{s.type}</span>
+                </div>
+                <h3 class="text-sm font-bold text-foreground leading-snug">{s.title}</h3>
+                <p class="flex items-center gap-1 mt-1.5 text-xs text-muted-foreground">
+                  <svg class="h-3.5 w-3.5 shrink-0 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                    <path d="M15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                  </svg>
+                  {s.place}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA DAFTAR ── */}
+      <section class="mb-8">
+        <div class="relative overflow-hidden rounded-3xl border border-border bg-card p-8 sm:p-12 text-center">
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-rose-500/5 via-transparent to-amber-400/5" aria-hidden="true"></div>
+
+          <div class="relative z-10 max-w-xl mx-auto space-y-5">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-300 border border-rose-200/70 dark:border-rose-400/20 text-xs font-bold tracking-widest uppercase">
+              Bergabung Bersama Kami
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-foreground">
+              Siap Memulai Perjalanan Hafalan?
+            </h2>
+
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              Daftarkan diri Anda untuk mengikuti program talaqqi, tasmi', atau karantina murojaah bersama para hafidz berpengalaman di Baitul Murojaah.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-3 pt-2">
+              <a
+                href="https://wa.me/628111622441"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-destructive text-destructive-foreground text-xs font-bold uppercase tracking-wider hover:bg-destructive/90 transition-all active:scale-[0.98]"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.096.535 4.07 1.477 5.797L0 24l6.345-1.646A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.799 9.799 0 0 1-5.092-1.424l-.364-.216-3.767.977.998-3.68-.237-.378A9.79 9.79 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+                </svg>
+                Hubungi via WhatsApp
+              </a>
+
+              <a
+                href="/"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-background text-foreground text-xs font-bold uppercase tracking-wider hover:bg-muted transition-all active:scale-[0.98]"
+              >
+                Kembali ke Beranda
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .islamic-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23fcd34d' stroke-width='1'%3E%3Crect x='26' y='26' width='28' height='28'/%3E%3Crect x='26' y='26' width='28' height='28' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3Cpath d='M0 0L26 26M80 0L54 26M0 80L26 54M80 80L54 54M40 0V20.2M40 80V59.8M0 40H20.2M80 40H59.8'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 80px;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,0.6) 45%, transparent 85%);
+    mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,0.6) 45%, transparent 85%);
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .hero-spin {
+    animation: spin-slow 30s linear infinite;
+  }
+
+  :global(.star-border.yt-star-btn) {
+    padding: 0.85rem 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  :global(.star-border.yt-star-btn:hover) {
+    transform: translateY(-2px);
+  }
+  :global(.star-border.yt-star-btn .yt-icon) {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  :global(.star-border.yt-star-btn:hover .yt-icon) {
+    transform: scale(1.15);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.star-border.yt-star-btn),
+    :global(.star-border.yt-star-btn .yt-icon) { transition: none; }
+    .hero-spin { animation: none; }
+  }
+</style>

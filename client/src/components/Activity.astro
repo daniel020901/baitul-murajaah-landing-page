@@ -1,6 +1,6 @@
 ---
 import StarBorder from '@/components/ui/Starborder';
-
+import "@/styles/global.css";
 // Data lokasi cabang / halaqah — tambah/ubah di sini, grid otomatis menyesuaikan
 const locations = [
   {
@@ -70,7 +70,7 @@ const locations = [
     </div>
 
     <!-- 1. LIVE HIGHLIGHT BANNER (Tampil jika ada event/live YT) -->
-    <div class="live-banner relative isolate overflow-hidden rounded-[2rem] p-6 sm:p-10 lg:p-12 mb-20 text-white shadow-2xl shadow-red-950/30 ring-1 ring-amber-300/30">
+    <div class="live-banner relative isolate overflow-hidden rounded-[2rem] p-6 sm:p-10 lg:p-12 mb-20 text-white  ring-1 ring-amber-300/30">
 
       <!-- Background: banner_yt.jpg -->
       <img
@@ -159,7 +159,7 @@ const locations = [
               glow={0.8}
               sparkle
               hover="lap"
-              className="yt-star-btn text-sm shadow-lg shadow-red-950/50"
+              className="yt-star-btn text-sm "
             >
               <svg class="yt-icon w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -211,9 +211,7 @@ const locations = [
         </div>
         <h3 class="mt-2  text-2xl sm:text-3xl font-bold text-foreground">Temukan Majelis Kami</h3>
       </div>
-      <p class="text-sm text-muted-foreground max-w-sm sm:text-right">
-        {locations.length} titik kegiatan aktif untuk talaqqi, tasmi', dan karantina hafalan.
-      </p>
+      
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 cursor-pointer">
@@ -240,7 +238,7 @@ const locations = [
           </span>
 
           <!-- Ikon -->
-          <div class="relative grid h-12 w-12 place-items-center rounded-2xl bg-linear-to-br from-rose-500 to-red-800 text-amber-200 shadow-lg shadow-rose-500/30 ring-1 ring-amber-300/40 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+          <div class="relative grid h-12 w-12 place-items-center rounded-2xl bg-linear-to-br from-rose-500 to-red-800 text-amber-200  ring-1 ring-amber-300/40 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               {loc.icon.map((d) => <path d={d} />)}
             </svg>
@@ -281,41 +279,3 @@ const locations = [
   </div>
 </section>
 
-<style>
-  /* Pola girih 8 titik (emas) — tile berulang, memudar ke tepi */
-  .islamic-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23fcd34d' stroke-width='1'%3E%3Crect x='26' y='26' width='28' height='28'/%3E%3Crect x='26' y='26' width='28' height='28' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3Cpath d='M0 0L26 26M80 0L54 26M0 80L26 54M80 80L54 54M40 0V20.2M40 80V59.8M0 40H20.2M80 40H59.8'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 80px 80px;
-    -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.6) 45%, transparent 85%);
-    mask-image: linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.6) 45%, transparent 85%);
-  }
-
-  /* StarBorder dirender oleh React island, jadi pakai :global.
-     Selektor ganda agar menang dari .star-border (unlayered) */
-  :global(.star-border.yt-star-btn) {
-    padding: 0.85rem 1.6rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  :global(.star-border.yt-star-btn:hover) {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px -10px rgba(127, 29, 29, 0.7), 0 0 24px -6px rgba(251, 191, 36, 0.45);
-  }
-
-  :global(.star-border.yt-star-btn .yt-icon) {
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  :global(.star-border.yt-star-btn:hover .yt-icon) {
-    transform: scale(1.15);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    :global(.star-border.yt-star-btn),
-    :global(.star-border.yt-star-btn .yt-icon) {
-      transition: none;
-    }
-  }
-</style>

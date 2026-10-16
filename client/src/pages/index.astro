@@ -8,6 +8,7 @@ import Activity from '@/components/Activity.astro';
 import Blog from '@/components/Blog.astro';
 import Gallery from '@/components/Gallery';
 import BookSection from '@/components/BookSection.astro';
+import FaQ from '@/components/FaQ';
 
 const title = "Home"
 ---
@@ -19,5 +20,6 @@ const title = "Home"
 	<BookSection/>
 	<Blog/>
 	<Gallery client:load/>
+	<FaQ client:load/>
 	</BaseLayout>
 

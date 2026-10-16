@@ -1,6 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
-import {Navbar} from "@/components/Navbar.tsx";
+import { Navbar } from "@/components/Navbar.tsx";
+import { CartDrawer } from "@/components/ui/cart.tsx";
 const { title } = Astro.props;
 ---
 
@@ -13,13 +14,13 @@ const { title } = Astro.props;
   </head>
   <body>
     <Navbar client:load />
+    <!-- CartDrawer selalu di-mount agar state nanostores bisa mengontrolnya -->
+    <CartDrawer client:load />
     <main
       class="min-h-screen w-full overflow-x-hidden bg-white dark:bg-neutral-950 text-foreground antialiased rounded-xl"
     >
-    
       <slot />
-      
-    <Footer/>
+      <Footer />
     </main>
   </body>
 </html>

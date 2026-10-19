@@ -4,15 +4,19 @@ import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
+import { SiteHeader } from "@/components/site-header"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarProvider,
 } from "@/components/ui/sidebar"
+import { Toaster } from "@/components/ui/sonner"
 import { mockAdminUser } from "@/data/mock"
 import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, FileTextIcon, Settings2Icon, CircleHelpIcon, SearchIcon, DatabaseIcon, FileChartColumnIcon, FileIcon, CommandIcon } from "lucide-react"
 
@@ -21,13 +25,19 @@ const data = {
   navMain: [
     {
       title: "Overview",
-      url: "#overview",
+      url: "/",
       icon: <LayoutDashboardIcon />,
     },
     {
       title: "Warta & Blog",
-      url: "#blog",
+      url: "/blog",
       icon: <FileTextIcon />,
+      items: [
+        { title: "Semua artikel", url: "/blog" },
+        { title: "Tambah baru", url: "/blog/baru" },
+        { title: "Kategori", url: "/blog?tab=kategori" },
+        { title: "Tag", url: "/blog?tab=tag" },
+      ],
     },
     {
       title: "Bookstore",
@@ -108,3 +118,28 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   )
 }
+
+export function AdminSidebarShell({ children }: { children?: React.ReactNode }) {
+  return (
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as React.CSSProperties
+      }
+    >
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <SiteHeader />
+        <div className="flex flex-1 flex-col">
+          <div className="@container/main flex flex-1 flex-col gap-2">
+            {children}
+          </div>
+        </div>
+      </SidebarInset>
+      <Toaster />
+    </SidebarProvider>
+  )
+}
+

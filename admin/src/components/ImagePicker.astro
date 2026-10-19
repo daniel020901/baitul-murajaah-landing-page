@@ -1,0 +1,106 @@
+---
+interface Props {
+  initialImage?: string;
+}
+
+const { initialImage = '' } = Astro.props;
+---
+
+<section class="bg-white border border-[#dde3ea] rounded-[10px]">
+  <h2 class="m-0 px-4 py-3.5 text-sm font-bold text-[#1b2430] border-b border-[#dde3ea]">
+    Gambar unggulan
+  </h2>
+
+  <div class="flex flex-col gap-3 p-4">
+    <input
+      id="featured-image-input"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+      class="hidden"
+    />
+
+    <div
+      id="featured-image-preview-box"
+      class="relative aspect-16/9 box-border flex flex-col items-center justify-center gap-2 border-2 border-dashed border-[#b5bfcc] rounded-[10px] bg-[#f8fafc] text-[#5b6472] overflow-hidden cursor-pointer hover:border-[#2563eb] transition-colors"
+    >
+      <img
+        id="featured-image-img"
+        src={initialImage}
+        alt="Gambar unggulan"
+        class:list={[
+          "w-full h-full object-cover",
+          initialImage ? "block" : "hidden"
+        ]}
+      />
+      <div
+        id="featured-image-empty"
+        class:list={[
+          "flex flex-col items-center justify-center gap-2",
+          initialImage ? "hidden" : "flex"
+        ]}
+      >
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 5h18v14H3zM3 16l5-5 4 4 3-3 6 6M9 9.5h.01"></path>
+        </svg>
+        <span class="text-[13px]">Belum ada gambar</span>
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <button
+        id="btn-pick-image"
+        type="button"
+        class="flex-1 min-h-[44px] px-4 rounded-lg border border-[#c5cdd8] bg-white hover:bg-[#f8fafc] text-[#1d4ed8] font-sans text-[13px] font-semibold cursor-pointer transition-colors"
+      >
+        Atur gambar unggulan
+      </button>
+      <button
+        id="btn-remove-image"
+        type="button"
+        class:list={[
+          "min-h-[44px] px-3 rounded-lg border border-[#fecdca] bg-[#fef3f2] text-[#b42318] font-sans text-xs font-semibold cursor-pointer",
+          initialImage ? "block" : "hidden"
+        ]}
+      >
+        Hapus
+      </button>
+    </div>
+
+    <span class="text-xs text-[#5b6472]">
+      Disarankan rasio 16:9, format JPG atau WebP.
+    </span>
+  </div>
+</section>
+
+<script>
+  const fileInput = document.getElementById('featured-image-input') as HTMLInputElement | null;
+  const pickBtn = document.getElementById('btn-pick-image');
+  const removeBtn = document.getElementById('btn-remove-image');
+  const previewBox = document.getElementById('featured-image-preview-box');
+  const imgEl = document.getElementById('featured-image-img') as HTMLImageElement | null;
+  const emptyEl = document.getElementById('featured-image-empty');
+
+  const openPicker = () => fileInput?.click();
+  pickBtn?.addEventListener('click', openPicker);
+  previewBox?.addEventListener('click', openPicker);
+
+  fileInput?.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (!file || !imgEl) return;
+    const url = URL.createObjectURL(file);
+    imgEl.src = url;
+    imgEl.classList.remove('hidden');
+    emptyEl?.classList.add('hidden');
+    removeBtn?.classList.remove('hidden');
+  });
+
+  removeBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!imgEl || !fileInput) return;
+    fileInput.value = '';
+    imgEl.src = '';
+    imgEl.classList.add('hidden');
+    emptyEl?.classList.remove('hidden');
+    removeBtn.classList.add('hidden');
+  });
+</script>

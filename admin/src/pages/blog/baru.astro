@@ -1,0 +1,29 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import BlogEditorForm from '@/components/BlogEditorForm.astro';
+---
+
+<AdminLayout
+  title="Tambah Artikel Baru"
+  breadcrumb="Artikel / Tambah baru"
+  activeSub="new"
+>
+  <Fragment slot="actions">
+    <button
+      id="btn-preview-top"
+      type="button"
+      class="min-h-[44px] px-[18px] rounded-lg border border-[#c5cdd8] bg-white hover:bg-[#f1f5f9] text-[#1b2430] font-sans text-sm font-semibold cursor-pointer transition-colors"
+    >
+      Pratinjau
+    </button>
+    <button
+      id="btn-publish-top"
+      type="button"
+      class="min-h-[44px] px-5 rounded-lg border-none bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-sans text-sm font-semibold cursor-pointer transition-colors"
+    >
+      Terbitkan
+    </button>
+  </Fragment>
+
+  <BlogEditorForm />
+</AdminLayout>

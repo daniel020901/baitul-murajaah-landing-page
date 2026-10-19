@@ -1,0 +1,27 @@
+---
+import { DataTable as ReactDataTable } from '@/components/data-table';
+import dashboardData from '@/app/dashboard/data.json';
+import type { BlogArticle } from '@/data/mock-blog';
+
+interface Props {
+  articles?: BlogArticle[];
+}
+
+const { articles = [] } = Astro.props;
+
+const mappedArticles = articles.map((article, idx) => ({
+  id: Number(article.id) || idx + 1,
+  header: article.title,
+  type: article.categories[0] || 'Artikel',
+  status: article.status === 'Terbit' ? 'Done' : 'In Process',
+  target: `${article.tags.length}`,
+  limit: '160',
+  reviewer: article.author,
+}));
+
+const tableData = mappedArticles.length > 0
+  ? [...mappedArticles, ...dashboardData.slice(mappedArticles.length)]
+  : dashboardData;
+---
+
+<ReactDataTable client:load data={tableData} />

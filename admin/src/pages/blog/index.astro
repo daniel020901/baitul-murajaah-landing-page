@@ -1,0 +1,22 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import DataTable from '@/components/DataTable.astro';
+import { mockArticles } from '@/data/mock-blog';
+---
+
+<AdminLayout
+  title="Semua Artikel"
+  breadcrumb="Artikel / Semua artikel"
+  activeSub="list"
+>
+  <Fragment slot="actions">
+    <a
+      href="/blog/baru"
+      class="inline-flex items-center justify-center min-h-[44px] px-5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-sans text-sm font-semibold no-underline transition-colors"
+    >
+      + Tambah Artikel Baru
+    </a>
+  </Fragment>
+
+  <DataTable articles={mockArticles} />
+</AdminLayout>

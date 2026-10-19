@@ -1,0 +1,105 @@
+---
+interface Props {
+  status?: 'Draf' | 'Menunggu tinjauan' | 'Terbit';
+  visibility?: 'Publik' | 'Privat' | 'Dilindungi kata sandi';
+  schedule?: 'Terbitkan segera' | 'Jadwalkan tanggal';
+}
+
+const {
+  status = 'Draf',
+  visibility = 'Publik',
+  schedule = 'Terbitkan segera',
+} = Astro.props;
+---
+
+<section class="bg-white border border-[#dde3ea] rounded-[10px]">
+  <h2 class="m-0 px-4 py-3.5 text-sm font-bold text-[#1b2430] border-b border-[#dde3ea]">
+    Terbitkan
+  </h2>
+
+  <div class="flex flex-col gap-3 p-4">
+    <div class="flex flex-col gap-1.5">
+      <label for="status" class="text-[13px] font-semibold text-[#1b2430]">Status</label>
+      <select
+        id="status"
+        name="status"
+        class="min-h-[44px] box-border px-2.5 border border-[#c5cdd8] rounded-lg bg-white text-[#1b2430] font-sans text-sm focus:outline-none focus:border-[#2563eb]"
+      >
+        <option value="Draf" selected={status === 'Draf'}>Draf</option>
+        <option value="Menunggu tinjauan" selected={status === 'Menunggu tinjauan'}>Menunggu tinjauan</option>
+        <option value="Terbit" selected={status === 'Terbit'}>Terbit</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="visibilitas" class="text-[13px] font-semibold text-[#1b2430]">Visibilitas</label>
+      <select
+        id="visibilitas"
+        name="visibilitas"
+        class="min-h-[44px] box-border px-2.5 border border-[#c5cdd8] rounded-lg bg-white text-[#1b2430] font-sans text-sm focus:outline-none focus:border-[#2563eb]"
+      >
+        <option value="Publik" selected={visibility === 'Publik'}>Publik</option>
+        <option value="Privat" selected={visibility === 'Privat'}>Privat</option>
+        <option value="Dilindungi kata sandi" selected={visibility === 'Dilindungi kata sandi'}>Dilindungi kata sandi</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="jadwal" class="text-[13px] font-semibold text-[#1b2430]">Jadwal</label>
+      <select
+        id="jadwal"
+        name="jadwal"
+        class="min-h-[44px] box-border px-2.5 border border-[#c5cdd8] rounded-lg bg-white text-[#1b2430] font-sans text-sm focus:outline-none focus:border-[#2563eb]"
+      >
+        <option value="Terbitkan segera" selected={schedule === 'Terbitkan segera'}>Terbitkan segera</option>
+        <option value="Jadwalkan tanggal" selected={schedule === 'Jadwalkan tanggal'}>Jadwalkan tanggal</option>
+      </select>
+      <input
+        id="jadwal-tanggal"
+        type="datetime-local"
+        class:list={[
+          "mt-1 min-h-[40px] px-2.5 border border-[#c5cdd8] rounded-lg bg-white text-[#1b2430] text-xs",
+          schedule === 'Jadwalkan tanggal' ? 'block' : 'hidden'
+        ]}
+      />
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-2.5 px-4 py-3 border-t border-[#dde3ea] bg-[#f8fafc] rounded-b-[10px]">
+    <button
+      id="btn-trash"
+      type="button"
+      class="min-h-[44px] px-1 border-none bg-transparent text-[#b42318] hover:underline font-sans text-[13px] font-semibold cursor-pointer"
+    >
+      Pindahkan ke sampah
+    </button>
+    <div class="flex gap-2">
+      <button
+        id="btn-save-draft"
+        type="button"
+        class="min-h-[44px] px-3.5 rounded-lg border border-[#c5cdd8] bg-white hover:bg-[#f1f5f9] text-[#1b2430] font-sans text-[13px] font-semibold cursor-pointer transition-colors"
+      >
+        Simpan draf
+      </button>
+      <button
+        id="btn-publish-side"
+        type="button"
+        class="min-h-[44px] px-4 rounded-lg border-none bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-sans text-[13px] font-semibold cursor-pointer transition-colors"
+      >
+        Terbitkan
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const jadwalSelect = document.getElementById('jadwal') as HTMLSelectElement | null;
+  const jadwalTanggal = document.getElementById('jadwal-tanggal');
+  jadwalSelect?.addEventListener('change', () => {
+    if (jadwalSelect.value === 'Jadwalkan tanggal') {
+      jadwalTanggal?.classList.remove('hidden');
+    } else {
+      jadwalTanggal?.classList.add('hidden');
+    }
+  });
+</script>

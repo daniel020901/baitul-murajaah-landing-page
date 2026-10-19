@@ -1,0 +1,52 @@
+---
+interface Props {
+  id: string;
+  label?: string;
+  type?: 'text' | 'textarea';
+  placeholder?: string;
+  value?: string;
+  rows?: number;
+  hint?: string;
+  ariaLabel?: string;
+}
+
+const {
+  id,
+  label,
+  type = 'text',
+  placeholder = '',
+  value = '',
+  rows = 3,
+  hint,
+  ariaLabel,
+} = Astro.props;
+---
+
+<div class="flex flex-col gap-1.5">
+  {label && (
+    <label for={id} class="text-[13px] font-semibold text-[#1b2430]">
+      {label}
+    </label>
+  )}
+  {type === 'textarea' ? (
+    <textarea
+      id={id}
+      name={id}
+      rows={rows}
+      aria-label={ariaLabel || label}
+      placeholder={placeholder}
+      class="w-full box-border px-3.5 py-3 border border-[#c5cdd8] rounded-lg bg-white text-[#1b2430] font-sans text-sm leading-relaxed resize-y focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/15"
+    >{value}</textarea>
+  ) : (
+    <input
+      id={id}
+      name={id}
+      type="text"
+      aria-label={ariaLabel || label}
+      placeholder={placeholder}
+      value={value}
+      class="min-h-[44px] w-full box-border px-3 border border-[#c5cdd8] rounded-lg bg-white text-[#1b2430] font-sans text-sm focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/15"
+    />
+  )}
+  {hint && <span class="text-xs text-[#5b6472]">{hint}</span>}
+</div>

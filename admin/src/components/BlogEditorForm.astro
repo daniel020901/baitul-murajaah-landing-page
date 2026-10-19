@@ -1,0 +1,357 @@
+---
+import RichEditor from '@/components/editor/RichEditor';
+import FormField from '@/components/FormField.astro';
+import PublishBox from '@/components/PublishBox.astro';
+import ImagePicker from '@/components/ImagePicker.astro';
+import { defaultCategories, type BlogArticle } from '@/data/mock-blog';
+
+interface Props {
+  article?: Partial<BlogArticle>;
+}
+
+const { article = {} } = Astro.props;
+
+const title = article.title ?? 'Panduan Memulai Blog Pertamamu';
+const slug = article.slug ?? 'panduan-memulai-blog';
+const content = article.content;
+const excerpt = article.excerpt ?? '';
+const seoTitle = article.seoTitle ?? '';
+const metaDescription = article.metaDescription ?? '';
+const status = article.status ?? 'Draf';
+const visibility = article.visibility ?? 'Publik';
+const schedule = article.schedule ?? 'Terbitkan segera';
+const selectedCategories = article.categories ?? ['Tutorial', 'Tips & Trik'];
+const tags = article.tags ?? ['web', 'tutorial', 'cms'];
+const updatedAt = article.updatedAt ?? 'hari ini';
+---
+
+<!-- Toast Notification Banner -->
+<div
+  id="editor-toast"
+  role="status"
+  aria-live="polite"
+  class="hidden fixed bottom-5 right-5 z-50 px-4 py-3 rounded-lg bg-[#151b26] text-white text-sm font-medium shadow-lg border border-[#2a3342] items-center gap-2.5"
+>
+  <span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
+  <span id="editor-toast-text">Perubahan berhasil disimpan</span>
+</div>
+
+<form id="blog-editor-form" class="flex flex-wrap gap-6 items-start mt-5" onsubmit="return false;">
+  <!-- Kolom Kiri (Editor Utama) -->
+  <div class="flex-[999_1_460px] min-w-0 flex flex-col gap-4">
+    <!-- Input Judul Artikel -->
+    <input
+      id="article-title"
+      name="title"
+      type="text"
+      aria-label="Judul artikel"
+      placeholder="Tambahkan judul di sini"
+      value={title}
+      class="w-full box-border px-[18px] py-[14px] border border-[#dde3ea] rounded-[10px] bg-white text-[#1b2430] font-sans text-[28px] font-bold focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/15"
+    />
+
+    <!-- Tautan Permanen (Slug) -->
+    <div class="flex flex-wrap items-center gap-2 text-[13px] text-[#5b6472]">
+      <span class="font-semibold">Tautan permanen:</span>
+      <span>murojaah.id/blog/</span>
+      <input
+        id="article-slug"
+        name="slug"
+        type="text"
+        aria-label="Slug artikel"
+        value={slug}
+        class="min-h-[36px] box-border px-2.5 border border-[#dde3ea] rounded-md bg-white text-[#1b2430] font-sans text-[13px] focus:outline-none focus:border-[#2563eb]"
+      />
+      <button
+        id="btn-slug-generate"
+        type="button"
+        class="min-h-[36px] px-3 rounded-lg border-none bg-transparent text-[#1d4ed8] hover:underline font-sans text-[13px] font-semibold cursor-pointer"
+      >
+        Ubah
+      </button>
+    </div>
+
+    <!-- Lexical Rich Text Editor (Hanya dimuat di halaman tulis/edit) -->
+    <RichEditor client:load initialHtml={content} lastUpdated={updatedAt} />
+
+    <!-- Ringkasan Artikel -->
+    <section class="bg-white border border-[#dde3ea] rounded-[10px]">
+      <h2 class="m-0 px-4 py-3.5 text-sm font-bold text-[#1b2430] border-b border-[#dde3ea]">
+        Ringkasan artikel
+      </h2>
+      <div class="p-4">
+        <FormField
+          id="ringkasan-artikel"
+          type="textarea"
+          rows={3}
+          ariaLabel="Ringkasan artikel"
+          placeholder="Tulis ringkasan singkat yang tampil di daftar artikel"
+          value={excerpt}
+        />
+      </div>
+    </section>
+
+    <!-- Pengaturan SEO -->
+    <section class="bg-white border border-[#dde3ea] rounded-[10px]">
+      <h2 class="m-0 px-4 py-3.5 text-sm font-bold text-[#1b2430] border-b border-[#dde3ea]">
+        Pengaturan SEO
+      </h2>
+      <div class="flex flex-col gap-3.5 p-4">
+        <FormField
+          id="seo-judul"
+          label="Judul SEO"
+          type="text"
+          placeholder="Judul yang tampil di hasil pencarian"
+          value={seoTitle}
+        />
+        <FormField
+          id="seo-desk"
+          label="Meta deskripsi"
+          type="textarea"
+          rows={3}
+          placeholder="Deskripsi singkat untuk mesin pencari"
+          value={metaDescription}
+          hint="Disarankan maksimal 160 karakter."
+        />
+      </div>
+    </section>
+  </div>
+
+  <!-- Kolom Kanan (Sidebar Pengaturan Artikel) -->
+  <aside aria-label="Pengaturan artikel" class="flex-[1_1_300px] min-w-0 flex flex-col gap-4">
+    <!-- Kotak Terbitkan -->
+    <PublishBox status={status} visibility={visibility} schedule={schedule} />
+
+    <!-- Kotak Kategori -->
+    <section class="bg-white border border-[#dde3ea] rounded-[10px]">
+      <h2 class="m-0 px-4 py-3.5 text-sm font-bold text-[#1b2430] border-b border-[#dde3ea]">
+        Kategori
+      </h2>
+      <div class="flex flex-col px-4 pt-2 pb-3">
+        <div id="category-list" class="flex flex-col">
+          {defaultCategories.map((cat) => (
+            <label class="flex items-center gap-2.5 min-h-[42px] cursor-pointer">
+              <input
+                type="checkbox"
+                name="categories"
+                value={cat}
+                checked={selectedCategories.includes(cat)}
+                class="w-[18px] h-[18px] m-0 accent-[#2563eb] cursor-pointer"
+              />
+              <span class="text-sm text-[#1b2430]">{cat}</span>
+            </label>
+          ))}
+        </div>
+
+        <!-- Inline Input Tambah Kategori -->
+        <div id="new-category-box" class="hidden flex-col gap-2 mt-2 pt-2 border-t border-[#dde3ea]">
+          <input
+            id="new-category-input"
+            type="text"
+            placeholder="Nama kategori baru..."
+            class="min-h-[38px] px-3 border border-[#c5cdd8] rounded-lg bg-white text-sm text-[#1b2430] focus:outline-none focus:border-[#2563eb]"
+          />
+          <button
+            id="btn-save-category"
+            type="button"
+            class="self-start min-h-[34px] px-3 rounded-lg bg-[#2563eb] text-white text-xs font-semibold border-none cursor-pointer"
+          >
+            Simpan Kategori
+          </button>
+        </div>
+
+        <button
+          id="btn-toggle-new-cat"
+          type="button"
+          class="self-start min-h-[40px] p-0 border-none bg-transparent text-[#1d4ed8] hover:underline font-sans text-[13px] font-semibold cursor-pointer"
+        >
+          + Tambah kategori baru
+        </button>
+      </div>
+    </section>
+
+    <!-- Kotak Tag -->
+    <section class="bg-white border border-[#dde3ea] rounded-[10px]">
+      <h2 class="m-0 px-4 py-3.5 text-sm font-bold text-[#1b2430] border-b border-[#dde3ea]">
+        Tag
+      </h2>
+      <div class="flex flex-col gap-3 p-4">
+        <div class="flex gap-2">
+          <input
+            id="tag-input"
+            type="text"
+            aria-label="Tambah tag"
+            placeholder="Ketik tag, pisahkan dengan koma"
+            class="flex-1 min-w-0 min-h-[44px] box-border px-3 border border-[#c5cdd8] rounded-lg bg-white text-[#1b2430] font-sans text-sm focus:outline-none focus:border-[#2563eb]"
+          />
+          <button
+            id="btn-add-tag"
+            type="button"
+            class="min-h-[44px] px-4 rounded-lg border border-[#c5cdd8] bg-white hover:bg-[#f1f5f9] text-[#1b2430] font-sans text-[13px] font-semibold cursor-pointer transition-colors"
+          >
+            Tambah
+          </button>
+        </div>
+
+        <div id="tag-chips" class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span
+              data-tag={tag}
+              class="tag-chip inline-flex items-center gap-1.5 min-h-[36px] pl-3 pr-1.5 rounded-full bg-[#e7ebf1] text-[#1b2430] text-[13px] font-medium"
+            >
+              <span>{tag}</span>
+              <button
+                type="button"
+                aria-label={`Hapus tag ${tag}`}
+                class="btn-remove-tag flex items-center justify-center w-7 h-7 border-none rounded-full bg-transparent text-[#4a5565] hover:bg-[#cbd5e1] cursor-pointer"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18"></path>
+                </svg>
+              </button>
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Kotak Gambar Unggulan -->
+    <ImagePicker initialImage={article.featuredImage} />
+  </aside>
+</form>
+
+<script>
+  const titleInput = document.getElementById('article-title') as HTMLInputElement | null;
+  const slugInput = document.getElementById('article-slug') as HTMLInputElement | null;
+  const slugBtn = document.getElementById('btn-slug-generate');
+
+  const toSlug = (str: string) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+
+  slugBtn?.addEventListener('click', () => {
+    if (titleInput && slugInput) {
+      slugInput.value = toSlug(titleInput.value);
+      slugInput.focus();
+    }
+  });
+
+  // Kategori baru
+  const toggleCatBtn = document.getElementById('btn-toggle-new-cat');
+  const newCatBox = document.getElementById('new-category-box');
+  const newCatInput = document.getElementById('new-category-input') as HTMLInputElement | null;
+  const saveCatBtn = document.getElementById('btn-save-category');
+  const categoryList = document.getElementById('category-list');
+
+  toggleCatBtn?.addEventListener('click', () => {
+    newCatBox?.classList.toggle('hidden');
+    newCatBox?.classList.toggle('flex');
+    newCatInput?.focus();
+  });
+
+  saveCatBtn?.addEventListener('click', () => {
+    const val = newCatInput?.value.trim();
+    if (!val || !categoryList) return;
+    const label = document.createElement('label');
+    label.className = 'flex items-center gap-2.5 min-h-[42px] cursor-pointer';
+    label.innerHTML = `
+      <input type="checkbox" name="categories" value="${val}" checked class="w-[18px] h-[18px] m-0 accent-[#2563eb] cursor-pointer" />
+      <span class="text-sm text-[#1b2430]">${val}</span>
+    `;
+    categoryList.appendChild(label);
+    if (newCatInput) newCatInput.value = '';
+    newCatBox?.classList.add('hidden');
+    newCatBox?.classList.remove('flex');
+  });
+
+  // Tag tambah & hapus
+  const tagInput = document.getElementById('tag-input') as HTMLInputElement | null;
+  const addTagBtn = document.getElementById('btn-add-tag');
+  const tagChips = document.getElementById('tag-chips');
+
+  function bindRemoveButtons() {
+    document.querySelectorAll('.btn-remove-tag').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const chip = (e.currentTarget as HTMLElement).closest('.tag-chip');
+        chip?.remove();
+      });
+    });
+  }
+  bindRemoveButtons();
+
+  function addTagsFromInput() {
+    const raw = tagInput?.value.trim();
+    if (!raw || !tagChips) return;
+    const items = raw
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    items.forEach((tag) => {
+      const span = document.createElement('span');
+      span.setAttribute('data-tag', tag);
+      span.className =
+        'tag-chip inline-flex items-center gap-1.5 min-h-[36px] pl-3 pr-1.5 rounded-full bg-[#e7ebf1] text-[#1b2430] text-[13px] font-medium';
+      span.innerHTML = `
+        <span>${tag}</span>
+        <button type="button" aria-label="Hapus tag ${tag}" class="btn-remove-tag flex items-center justify-center w-7 h-7 border-none rounded-full bg-transparent text-[#4a5565] hover:bg-[#cbd5e1] cursor-pointer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      `;
+      tagChips.appendChild(span);
+    });
+
+    if (tagInput) tagInput.value = '';
+    bindRemoveButtons();
+  }
+
+  addTagBtn?.addEventListener('click', addTagsFromInput);
+  tagInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addTagsFromInput();
+    }
+  });
+
+  // Toast feedback untuk tombol Simpan Draf / Terbitkan
+  const toastEl = document.getElementById('editor-toast');
+  const toastText = document.getElementById('editor-toast-text');
+  function showToast(msg: string) {
+    if (!toastEl || !toastText) return;
+    toastText.textContent = msg;
+    toastEl.classList.remove('hidden');
+    toastEl.classList.add('flex');
+    setTimeout(() => {
+      toastEl.classList.add('hidden');
+      toastEl.classList.remove('flex');
+    }, 2800);
+  }
+
+  document.getElementById('btn-save-draft')?.addEventListener('click', () => {
+    showToast('Draf artikel berhasil disimpan!');
+  });
+  document.getElementById('btn-publish-side')?.addEventListener('click', () => {
+    const statusSelect = document.getElementById('status') as HTMLSelectElement | null;
+    if (statusSelect) statusSelect.value = 'Terbit';
+    showToast('Artikel berhasil diterbitkan!');
+  });
+  document.getElementById('btn-publish-top')?.addEventListener('click', () => {
+    const statusSelect = document.getElementById('status') as HTMLSelectElement | null;
+    if (statusSelect) statusSelect.value = 'Terbit';
+    showToast('Artikel berhasil diterbitkan!');
+  });
+  document.getElementById('btn-preview-top')?.addEventListener('click', () => {
+    showToast('Membuka mode pratinjau artikel...');
+  });
+  document.getElementById('btn-trash')?.addEventListener('click', () => {
+    if (confirm('Pindahkan artikel ini ke sampah?')) {
+      window.location.href = '/blog';
+    }
+  });
+</script>

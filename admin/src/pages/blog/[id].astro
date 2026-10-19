@@ -1,0 +1,45 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import BlogEditorForm from '@/components/BlogEditorForm.astro';
+import { mockArticles } from '@/data/mock-blog';
+
+export function getStaticPaths() {
+  return mockArticles.map((article) => ({
+    params: { id: article.id },
+  }));
+}
+
+const { id } = Astro.params;
+const article = mockArticles.find((a) => a.id === id) ?? mockArticles[0];
+---
+
+<AdminLayout
+  title="Sunting Artikel"
+  breadcrumb={`Artikel / Sunting / ${article.title}`}
+  activeSub="list"
+>
+  <Fragment slot="actions">
+    <a
+      href="/blog"
+      class="inline-flex items-center justify-center min-h-[44px] px-4 rounded-lg border border-[#c5cdd8] bg-white hover:bg-[#f1f5f9] text-[#5b6472] font-sans text-sm font-semibold no-underline transition-colors"
+    >
+      Kembali
+    </a>
+    <button
+      id="btn-preview-top"
+      type="button"
+      class="min-h-[44px] px-[18px] rounded-lg border border-[#c5cdd8] bg-white hover:bg-[#f1f5f9] text-[#1b2430] font-sans text-sm font-semibold cursor-pointer transition-colors"
+    >
+      Pratinjau
+    </button>
+    <button
+      id="btn-publish-top"
+      type="button"
+      class="min-h-[44px] px-5 rounded-lg border-none bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-sans text-sm font-semibold cursor-pointer transition-colors"
+    >
+      Perbarui
+    </button>
+  </Fragment>
+
+  <BlogEditorForm article={article} />
+</AdminLayout>

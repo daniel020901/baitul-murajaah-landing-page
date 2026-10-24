@@ -7,15 +7,10 @@ export function CartDrawer() {
   const [checkoutSuccess, setCheckoutSuccess] = useState(false);
 
   // Jangan return null di sini — biarkan komponen tetap di-mount agar useState tidak reset.
-  // Sembunyikan dengan CSS (pointer-events-none + opacity-0) ketika tidak aktif.
-
+  
   function handleCheckout() {
-    setCheckoutSuccess(true);
-    setTimeout(() => {
-      clearCart();
-      setCheckoutSuccess(false);
-      closeCart();
-    }, 2200);
+    closeCart();
+    window.location.href = '/checkout';
   }
 
   return (
@@ -171,7 +166,7 @@ export function CartDrawer() {
                 className="w-full py-3 rounded-xl bg-destructive text-destructive-foreground font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-destructive/90 transition-all cursor-pointer active:scale-[0.99]"
               >
                 <CreditCard className="w-4 h-4" />
-                Checkout via Mayar.id
+                Lanjut ke Checkout
               </button>
             </div>
           )}

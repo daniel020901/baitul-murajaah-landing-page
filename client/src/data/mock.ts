@@ -1,6 +1,10 @@
+import  z  from "zod";
+
 // ============================================================
 // Mock data untuk blog — nanti diganti fetch dari CMS / API
 // ============================================================
+
+
 export interface Product {
   id: string;
   title: string;
@@ -43,6 +47,32 @@ export interface CartItem {
   arabicTitle: string;
   quantity: number;
 }
+
+export const shippingFormSchema = z.object({
+  name: z.string().min(2, "Nama lengkap minimal 2 karakter"),
+  email: z.string().min(1, "Email wajib diisi").email("Format email tidak valid"),
+  phone: z
+    .string()
+    .min(8, "Nomor telepon/WhatsApp minimal 8 digit")
+    .max(15, "Nomor telepon/WhatsApp maksimal 15 digit")
+    .regex(/^[0-9+]+$/, "Nomor telepon hanya boleh berisi angka dan tanda +"),
+  address: z.string().min(5, "Alamat lengkap minimal 5 karakter"),
+  city: z.string().min(2, "Kota / Kabupaten wajib diisi"),
+  notes: z.string().optional(),
+});
+
+export type ShippingFormData = z.infer<typeof shippingFormSchema>;
+
+export interface Order {
+  id: string;
+  items: CartItem[];
+  shipping: ShippingFormData;
+  subtotal: number;
+  totalAmount: number;
+  status: "pending" | "paid" | "shipped" | "cancelled";
+  createdAt: string;
+}
+
 const unsplash = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&h=750&q=80`;
 
@@ -527,3 +557,4 @@ export const bookCategories: string[] = [
   "SEMUA",
   ...Array.from(new Set(products.map((p) => p.category))),
 ];
+
